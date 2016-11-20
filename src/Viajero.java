@@ -1,7 +1,10 @@
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.*;
 
 public class Viajero {
@@ -40,9 +43,35 @@ public class Viajero {
 		}
 		escribir.close();
 	}
+	
+	public void leeArchivo() throws IOException{
+		String s1;
+		BufferedReader br = new BufferedReader(new FileReader("Matriz.txt"));
+		s1 = br.readLine();
+		int cantidadNumeros = 0;
+		int [][] matriz = new int [s1.length()][s1.length()]; 
+		StringTokenizer st = new StringTokenizer(s1);
+		
+		while(st.hasMoreTokens()){
+		matriz[]	
+		}
+		
+	}
+	
 
 	public static void main(String [] args) throws IOException{
 		generaArchivo();
 		
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
