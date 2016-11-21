@@ -109,14 +109,3 @@ public class Viajero {
 		leerArchivo();
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
