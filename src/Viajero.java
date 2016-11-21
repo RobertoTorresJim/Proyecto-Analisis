@@ -12,6 +12,12 @@ public class Viajero {
 	public static void generaArchivo() throws IOException{
 		Random rd = new Random();
 		File archivo = new File("Matriz.txt");
+		if(archivo.exists() && archivo.delete()){
+			System.out.println("Archivo borrado");
+			if(archivo.createNewFile()){
+				System.out.println("Nuevo archivo creado");
+			}
+		}
 		FileWriter escribir = new FileWriter(archivo, true);
 		int [] numeros = new int [21];
 		for(int i = 0; i < 21; i++){
@@ -75,7 +81,28 @@ public class Viajero {
 		return matriz;
 	}
 
-	
+	public int viajero_fb(int [] ruta, int l, int [][] matrizDistancias, int distancia){
+		int minCost;
+		int n = ruta.length;
+		
+		if(l == n+1){
+			minCost = distancia + matrizDistancias[ruta[n]][ruta[0]];
+		}
+		else{
+			minCost = (int)(Double.POSITIVE_INFINITY);
+			for(int i = l; i < n; i++){
+				int temp = ruta[l];
+				ruta[l] = ruta[i];
+				ruta[i] = temp;
+				int nuevaDistancia = distancia + matrizDistancias[ruta[l]][ruta[l+1]];
+				minCost = Math.min(minCost, viajero_fb(ruta, l+1, matrizDistancias, nuevaDistancia));
+				temp = ruta[l];
+				ruta[l] = ruta[i];
+				ruta[i] = temp;
+			}
+		}
+		return  minCost;
+	}
 	
 	public static void main(String [] args) throws IOException{
 		//generaArchivo();
