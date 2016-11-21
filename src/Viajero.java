@@ -44,30 +44,37 @@ public class Viajero {
 		escribir.close();
 	}
 	
-	public static void leeArchivo() throws IOException{
+	public static int[][] leerArchivo() throws IOException{
 		String s1;
 		BufferedReader br = new BufferedReader(new FileReader("Matriz.txt"));
-		s1 = br.readLine();
-		int cantidadNumeros = 0;
-		int [][] matriz = new int [s1.length()][s1.length()]; 
+		String temp="";
+		String bfRead;
+		
+		while((bfRead = br.readLine())!=null)
+			//haz el ciclo, mientras bfRead tiene datos
+			temp = temp + bfRead;
+		
+		s1 = temp;
+		int [][] matriz = new int [7][7]; 
 		StringTokenizer st = new StringTokenizer(s1);
 		System.out.println(s1);
 		
 		while(st.hasMoreTokens()){
-			
-			//System.out.println(Integer.parseInt(st.nextToken()));
-			matriz[0][cantidadNumeros] = Integer.parseInt(st.nextToken());
-			cantidadNumeros++;
+			//llena matriz de datos mientras aun haya
+			for(int i = 0; i < 7; i++){
+				for(int j = 0; j < 7; j++){
+					matriz[i][j] = Integer.parseInt(st.nextToken());
+				}
+			}
 		}
-		for(int k=0; k<7; k++){
-			System.out.println(matriz[0][k]);
-		}
+		br.close();
+		return matriz;
 	}
 	
 
 	public static void main(String [] args) throws IOException{
 		//generaArchivo();
-		leeArchivo();
+		leerArchivo();
 	}
 }
 
