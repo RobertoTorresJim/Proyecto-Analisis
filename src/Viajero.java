@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.util.*;
 
 public class Viajero {
-	static int ob = 0;
+	static long ob = 0;
 	
 	public static void generaArchivo(int n) throws IOException{
 		Random rd = new Random();
@@ -18,6 +18,7 @@ public class Viajero {
 				//System.out.println("Nuevo archivo creado");
 			}
 		}
+		
 		FileWriter escribir = new FileWriter(archivo, true);
 		int [] numeros = new int [((n*n)-n)/2];
 		for(int i = 0; i < (((n*n)-n)/2); i++){
@@ -91,7 +92,7 @@ public class Viajero {
 				int temp = ruta[l];
 				ruta[l] = ruta[i];
 				ruta[i] = temp;
-				int nuevaDistancia = distancia + matrizDistancias[ruta[l]][ruta[l+1]];
+				int nuevaDistancia = distancia + matrizDistancias[ruta[l]][ruta[l+1]];//OB
 				ob ++;
 				resultado.distancia = Math.min(resultado.distancia, viajero_fb(ruta, l+1, matrizDistancias, nuevaDistancia).distancia);
 				temp = ruta[l];
