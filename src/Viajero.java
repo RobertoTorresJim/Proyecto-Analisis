@@ -44,24 +44,30 @@ public class Viajero {
 		escribir.close();
 	}
 	
-	public void leeArchivo() throws IOException{
+	public static void leeArchivo() throws IOException{
 		String s1;
 		BufferedReader br = new BufferedReader(new FileReader("Matriz.txt"));
 		s1 = br.readLine();
 		int cantidadNumeros = 0;
 		int [][] matriz = new int [s1.length()][s1.length()]; 
 		StringTokenizer st = new StringTokenizer(s1);
+		System.out.println(s1);
 		
 		while(st.hasMoreTokens()){
-		matriz[]	
+			
+			//System.out.println(Integer.parseInt(st.nextToken()));
+			matriz[0][cantidadNumeros] = Integer.parseInt(st.nextToken());
+			cantidadNumeros++;
 		}
-		
+		for(int k=0; k<7; k++){
+			System.out.println(matriz[0][k]);
+		}
 	}
 	
 
 	public static void main(String [] args) throws IOException{
-		generaArchivo();
-		
+		//generaArchivo();
+		leeArchivo();
 	}
 }
 
