@@ -43,10 +43,14 @@ public class Viajero {
 		}
 		escribir.close();
 	}
-	
+	/*
+	 * @return int[][] 
+	 * 
+	 * Funcion que regresa una matriz entera, leida de un archivo de texto
+	 */
 	public static int[][] leerArchivo() throws IOException{
 		String s1;
-		BufferedReader br = new BufferedReader(new FileReader("Matriz.txt"));
+		BufferedReader br = new BufferedReader(new FileReader("Matriz.txt")); //lee el texto
 		String temp="";
 		String bfRead;
 		
@@ -54,13 +58,13 @@ public class Viajero {
 			//haz el ciclo, mientras bfRead tiene datos
 			temp = temp + bfRead;
 		
-		s1 = temp;
+		s1 = temp;// asigna todos los datos a s1
 		int [][] matriz = new int [7][7]; 
 		StringTokenizer st = new StringTokenizer(s1);
 		System.out.println(s1);
 		
 		while(st.hasMoreTokens()){
-			//llena matriz de datos mientras aun haya
+			//llena matriz de datos mientras aun haya en st
 			for(int i = 0; i < 7; i++){
 				for(int j = 0; j < 7; j++){
 					matriz[i][j] = Integer.parseInt(st.nextToken());
@@ -70,8 +74,9 @@ public class Viajero {
 		br.close();
 		return matriz;
 	}
-	
 
+	
+	
 	public static void main(String [] args) throws IOException{
 		//generaArchivo();
 		leerArchivo();
