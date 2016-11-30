@@ -104,8 +104,92 @@ public class Viajero {
 		resultado.ob = ob;
 		return  resultado;
 	}
+	public ArrayList<Integer> rutaParcial(ArrayList<Integer> ruta, ArrayList<Integer> rutaParcial){
+		for(int i = 0; i < ruta.size(); i++){
+			for(int j = 0; j < rutaParcial.size(); j++){
+				if(ruta.get(i) == rutaParcial.get(j)){
+					ruta.remove(i);
+				}
+			}
+		}return ruta;
+	}
+	
+	Nodo arbol = new Nodo();
+	
+	LinkedList<Nodo> cabecera = new LinkedList<Nodo>();
+	int acumulado = 0;
+	public Nodo viajero_BB(ArrayList<Integer>  ruta, ArrayList<Integer> rutaParcial, int [][] matrizDeDistancias, int index, int ac ){
+		ruta = rutaParcial(ruta, rutaParcial);
+		for(int i = 0; i < index; i++){
+			rutaParcial.add(ruta.get(i));
+			Nodo hijo = new Nodo();
+			hijo.acumulado = ac+matrizDeDistancias[rutaParcial.get(rutaParcial.size()-2)][rutaParcial.get(rutaParcial.size()-1)];
+			hijo.rutaParcial = rutaParcial;
+			rutaParcial.remove(rutaParcial.size()-1);
+		}
+	}
+	
+	public Nodo comparaNodos(){
+		
+	}
+	
+	
+	public int cotaInf (int [][] matrizDeDistancias){
+		double cotainf = 0;
+		int min1, min2; 
+		int x = -1; 
+		int y = -1;
+		min1 = matrizDeDistancias[0][1];
+		min2 = matrizDeDistancias[0][2];
+		for(int i = 0; i < matrizDeDistancias.length; i++ ){
+			for(int j = 0; j < matrizDeDistancias.length; j++){
+				if(matrizDeDistancias[i][j] == 0){
+					min1 = matrizDeDistancias[i][j+1];
+					x = j;
+				}
+				else{
+					min1 = matrizDeDistancias[i][j];
+					x = j;
+				}
+				if(i != j){
+					if(min1 > matrizDeDistancias[i][j]){
+						min1 = matrizDeDistancias[i][j];
+						y = j;
+					}
+				}
+			}cotainf = cotainf + min1;
+			for(int j = 0; j < matrizDeDistancias.length-1; j++){
+				if(matrizDeDistancias[i][j] == 0){
+					if(x == j+1){
+						min2 = matrizDeDistancias[i][j+2];	
+					}
+				}
+				else{
+					if(x == j){
+						if(matrizDeDistancias[i][j+1] == 0){
+							min2 = matrizDeDistancias[i][j+2];
+						}
+						else{
+							min2 = matrizDeDistancias[i][j+1];
+						}
+				}
+					
+				if(i != j){
+					if(min2 > matrizDeDistancias[i][j] && y != j){
+						min2 = matrizDeDistancias[i][j];
+					}
+				}
+			}cotainf = cotainf + min2;
+			
+			}
+		}
+		return (int)Math.ceil(cotainf/2);
+	}
+	
 	
 	public static void main(String [] args) throws IOException{
+		
+		/*
 		double promedio = 0;
 		for(int i = 4; i < 14; i++){
 			for(int k = 0; k < 50; k++){
@@ -121,5 +205,8 @@ public class Viajero {
 			System.out.println(promedio/50);
 			promedio = 0;
 		}
+		*/
+		Nodo ejemplo = new Nodo();
+		System.out.println("Termina");
 	}
 }
