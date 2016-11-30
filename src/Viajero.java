@@ -120,16 +120,19 @@ public class Viajero {
 	int acumulado = 0;
 	public Nodo viajero_BB(ArrayList<Integer>  ruta, ArrayList<Integer> rutaParcial, int [][] matrizDeDistancias, int index, int ac ){
 		ruta = rutaParcial(ruta, rutaParcial);
+		LinkedList<Nodo> aux = new LinkedList<Nodo>();
 		for(int i = 0; i < index; i++){
 			rutaParcial.add(ruta.get(i));
 			Nodo hijo = new Nodo();
 			hijo.acumulado = ac+matrizDeDistancias[rutaParcial.get(rutaParcial.size()-2)][rutaParcial.get(rutaParcial.size()-1)];
 			hijo.rutaParcial = rutaParcial;
+			aux.add(hijo);
 			rutaParcial.remove(rutaParcial.size()-1);
 		}
-	}
+		arbol.hijos.add(comparaNodos(aux));
+		}
 	
-	public Nodo comparaNodos(){
+	public Nodo comparaNodos(LinkedList<Nodo> aux){
 		
 	}
 	
