@@ -310,7 +310,7 @@ public class Viajero {
 		for(int i = 0; i < numHormigas; i++){
 			for(int j = 0; j < matrizDistancias.length; j++)
 				hormigas.get(i).no_visitadas.set(j, j);
-				hormigas.get(i).ruta
+				hormigas.get(i).ruta = null;
 		}
 		int paso = 1;
 		for(int i = 0; i < numHormigas; i++){
@@ -321,14 +321,28 @@ public class Viajero {
 		while(paso < matrizDistancias.length){
 			paso++;
 			for ( int k = 0; k < numHormigas; k++){
-				reglaDecision(k, paso);
+				reglaDecision(hormigas,k, paso, infoSeleccionada);
 			}
+		}
 			for (int k = 0; k < numHormigas; k++){
 				hormigas.get(k).longitudRuta = calculaLongitudRuta(k);
 			}
-		}
 		
-		return ;
+		return hormigas ;
+	}
+	
+	public void reglaDecision(ArrayList<Hormiga> hormigas, int i, int paso, double infoSeleccionada[][]){
+		int c = hormigas.get(i).ruta.get(paso-1);
+		double sumaProbabilidades = 0.0;
+		ArrayList<Double> probabilidadSeleccion = new ArrayList<Double>();
+		for(int j = 0; j < hormigas.get(i).no_visitadas.size(); j++){
+			probabilidadSeleccion.set(j, infoSeleccionada[c][j]);
+			sumaProbabilidades = sumaProbabilidades +probabilidadSeleccion.get(j);
+		}
+		Random random = new Random();
+		int r = (int)(random.nextDouble()*sumaProbabilidades + 0);
+		int j = 1;
+		double p = probabilidadSeleccion.get(j);
 	}
 	
 	public ArrayList<Hormiga> hillClimbing(ArrayList<Hormiga> hormigas, int [][] matrizDistancias){
