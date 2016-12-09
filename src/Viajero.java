@@ -343,6 +343,42 @@ public class Viajero {
 		int r = (int)(random.nextDouble()*sumaProbabilidades + 0);
 		int j = 1;
 		double p = probabilidadSeleccion.get(j);
+		while((int)p < r){
+			j++;
+			p = p + probabilidadSeleccion.get(j);
+		}
+		hormigas.get(i).ruta.set(paso, j);
+		hormigas.get(i).no_visitadas.remove(j);
+	}
+	
+	public feromona actualizaFeromona(ArrayList<Hormiga> hormigas, double [][] feromona, double [][] heuristica, int infoSeleccionada[][], double alpha, double beta, double ro){
+		int numHormigas = hormigas.size();
+		int n = feromona.length;
+		evaporaFeromonas(feromona, ro, n);
+		for(int i = 0; i < numHormigas; i++){
+			depositaFeromona(hormigas, feromona, i);
+		}
+		infoSeleccionada = 
+				
+	}
+	
+	public void evaporaFeromonas(double [][] feromona, double ro, int n){
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < n; j++){
+				feromona[i][j] = feromona [i][j]*(1-ro);
+				feromona[i][j] = feromona[j][i];
+			}
+		}
+	}
+	
+	public void depositaFeromona(ArrayList<Hormiga> hormigas, double [][] feromona, int i){
+		double deltaT = 1/hormigas.get(i).longitudRuta;
+		for(int j = 0; j < hormigas.get(i).ruta.size() - 1; j++){
+			int k = hormigas.get(i).ruta.get(i);
+			int l = hormigas.get(i).ruta.get(i+1);
+			feromona[k][l] = feromona[i][l] + deltaT;
+			feromona[k][l] = feromona[l][j];
+		}
 	}
 	
 	public ArrayList<Hormiga> hillClimbing(ArrayList<Hormiga> hormigas, int [][] matrizDistancias){
